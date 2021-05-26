@@ -17,6 +17,7 @@ public class Comment {
     @Column(name = "comment_image")
     private String commentImage;
 
+
     @Column(name = "comment_time")
     private Timestamp commentTime;
 
@@ -66,5 +67,13 @@ public class Comment {
 
     public void setFood(Food food) {
         this.food = food;
+    }
+
+    public Timestamp getCommentTime() {
+        return commentTime;
+    }
+
+    public void setCommentTime(Timestamp commentTime) {
+        this.commentTime = commentTime;
     }
 }
