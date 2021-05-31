@@ -16,4 +16,9 @@ public class AccountRoleServiceImpl implements AccountRoleService{
     public List<AccountRole> findAllByAccountId(Integer accountId) {
         return accountRoleRepository.findAllByAccountId(accountId);
     }
+
+    @Override
+    public void setRoleAccount(AccountRole accountRole) {
+        accountRoleRepository.save(accountRole);
+    }
 }

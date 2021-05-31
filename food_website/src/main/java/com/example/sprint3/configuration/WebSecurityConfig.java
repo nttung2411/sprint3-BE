@@ -56,12 +56,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.cors().and().csrf().disable()
                 // tắt xác thực cho các trang này
                 .authorizeRequests().antMatchers("/login",
-                "/menu",
+                "/allfood",
                 "/food-detail/**",
-                "/check-duplicate"
-              ).permitAll()
-                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().
-                antMatchers( "/api/account/admin/**").hasAuthority("ADMIN").antMatchers("/api/account/test").hasAnyAuthority("ADMIN","MEMBER").
+                "/check-duplicate",
+                "/save-account",
+                "/get-comment/**",
+                "/foodbyname/**",
+                "/foodbycategory/**"
+        ).permitAll().antMatchers(HttpMethod.OPTIONS,
+                "/save-comment",
+                "/save-order",
+                "/foodsCart/**",
+                "/remove-order/**").hasAuthority("MEMBER").antMatchers().hasAnyAuthority("ADMIN").
                 // các trang còn lại phải xác thực
                         anyRequest().fullyAuthenticated().and().
                 // đảm bảo sử dụng đúng session Stateless;

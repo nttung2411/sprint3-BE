@@ -18,6 +18,7 @@ public class AccountController {
     @Autowired
     private UserService userService;
 
+
     @GetMapping("/check-duplicate")
     public ResponseEntity<?> checkDuplicate(@RequestParam String accountName,
                                             @RequestParam String phone,
@@ -30,7 +31,7 @@ public class AccountController {
                 checkDuplicateRegister.setAccountName(account.getAccountName());
                 checkDuplicateRegister.setPhone(account.getUser().getPhone());
                 checkDuplicateRegister.setEmail(account.getUser().getEmail());
-                checkDuplicateRegister.setEmail(account.getUser().getIdentity());
+                checkDuplicateRegister.setIdentity(account.getUser().getIdentity());
 
                 return new ResponseEntity<>(checkDuplicateRegister, HttpStatus.OK);
             } else {

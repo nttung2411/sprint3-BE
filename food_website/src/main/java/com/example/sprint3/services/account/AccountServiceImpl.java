@@ -1,7 +1,10 @@
 package com.example.sprint3.services.account;
 
 import com.example.sprint3.models.Account;
+import com.example.sprint3.models.AccountRole;
+import com.example.sprint3.models.Role;
 import com.example.sprint3.repositories.AccountRepository;
+import com.example.sprint3.services.account_role.AccountRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,8 @@ public class AccountServiceImpl implements AccountService{
     AccountRepository accountRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
+    @Autowired
+    AccountRoleService accountRoleService;
 
     @Override
     public Account findAccountByName(String accountName) {
@@ -26,6 +31,13 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public void saveAccount(Account account) {
         account.setAccountPassword(passwordEncoder.encode(account.getAccountPassword()));
-        accountRepository.save(account);
+        Account accountNew = accountRepository.save(account);
+        Role role = new Role();
+        role.setRoleId(2);
+        role.setRoleName("MEMBER");
+        AccountRole accountRole = new AccountRole();
+        accountRole.setAccount(accountNew);
+        accountRole.setRole(role);
+        accountRoleService.setRoleAccount(accountRole);
     }
 }

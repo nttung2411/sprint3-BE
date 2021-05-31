@@ -9,6 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Service
 public class CommentServiceImpl implements CommentService{
@@ -21,6 +22,11 @@ public class CommentServiceImpl implements CommentService{
         comment.setCommentContent(content);
         comment.setCommentTime(new Timestamp(System.currentTimeMillis()));
         commentRepository.save(comment);
+    }
+
+    @Override
+    public List<Comment> getCommentsOfFood(Integer foodId) {
+        return commentRepository.getCommentsOfFood(foodId);
     }
 
     public String decodeContent(String content){
